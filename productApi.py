@@ -14,3 +14,11 @@ def getAllProducts():
         return json.dumps(allProducts,indent=4,cls=product.ProductEncoder)
     else:
         return jsonify({'Error':'No products found'}), 204
+    
+@app.route("/products/<int:id>",methods=['GET'])
+def getProductById(id: int):
+    getProduct = DAL.GetProductById(id)
+    if getProduct != None:
+        return json.dumps(getProduct,indent=4,cls=product.ProductEncoder)
+    else:
+        return jsonify({'Error':'Product not found'}), 404

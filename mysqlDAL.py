@@ -29,3 +29,18 @@ class MySQLDAL:
                 returnProduct = product.Product(resultProduct[0],resultProduct[1],resultProduct[2])
         mycursor.close()
         return returnProduct
+    
+    def InsertProduct(self, name, price):
+        mydb = mysql.connector.connect(host="localhost",user="root",password="Pa$$w0rd")
+        mydb.autocommit = True
+        mycursor = mydb.cursor()
+        args = (name,price)
+        mycursor.callproc('webshop.InsertProduct',args)
+        mycursor.close()
+
+    def UpdateProduct(self, id, name, price):
+        mydb = mysql.connector.connect(host="localhost",user="root",password="Pa$$w0rd")
+        mydb.autocommit = True
+        mycursor = mydb.cursor()
+        mycursor.callproc('webshop.UpdateProduct',args=(id,name,price))
+        mycursor.close() 

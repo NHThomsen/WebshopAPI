@@ -34,3 +34,8 @@ def updateProduct():
     productToUpdate = json.loads(request.data)
     DAL.UpdateProduct(productToUpdate["id"],productToUpdate["name"],productToUpdate["price"])
     return jsonify({'Product':'updated'}),200
+
+@app.route("/products/<int:id>",methods=['DELETE'])
+def deleteProduct(id: int):
+    DAL.DeleteProduct(id)
+    return jsonify({'Product':'deleted'}),200

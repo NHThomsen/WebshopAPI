@@ -43,4 +43,11 @@ class MySQLDAL:
         mydb.autocommit = True
         mycursor = mydb.cursor()
         mycursor.callproc('webshop.UpdateProduct',args=(id,name,price))
-        mycursor.close() 
+        mycursor.close()
+
+    def DeleteProduct(self, id):
+        mydb = mysql.connector.connect(host="localhost",user="root",password="Pa$$w0rd")
+        mydb.autocommit = True
+        mycursor = mydb.cursor()
+        mycursor.callproc('webshop.DeleteProduct',args=(id,))
+        mycursor.close()

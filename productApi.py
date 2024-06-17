@@ -25,9 +25,12 @@ def getProductById(id: int):
     
 @app.route("/products",methods=['POST'])
 def insertProduct():
-    productToInsert = json.loads(request.data)
-    DAL.InsertProduct(productToInsert["name"],productToInsert["price"])
-    return jsonify({'Product':'inserted'}),200
+    try:
+        productToInsert = json.loads(request.data)
+        DAL.InsertProduct(productToInsert["name"],productToInsert["price"])
+        return jsonify({'Product':'inserted'}),200
+    except:
+        return jsonify({'Product':'not inserted'}),400
 
 @app.route("/products",methods=['PUT'])
 def updateProduct():

@@ -21,7 +21,7 @@ def getProductById(id: int):
     if getProduct != None:
         return json.dumps(getProduct,indent=4,cls=product.ProductEncoder)
     else:
-        return jsonify({'Error':'Product not found'}), 404
+        return jsonify({'Error':'Product not found'}).headers["Content-Type"] == "application/json", 404
     
 @app.route("/products",methods=['POST'])
 def insertProduct():

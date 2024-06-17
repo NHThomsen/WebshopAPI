@@ -34,11 +34,17 @@ def insertProduct():
 
 @app.route("/products",methods=['PUT'])
 def updateProduct():
-    productToUpdate = json.loads(request.data)
-    DAL.UpdateProduct(productToUpdate["id"],productToUpdate["name"],productToUpdate["price"])
-    return jsonify({'Product':'updated'}),200
+    try:
+        productToUpdate = json.loads(request.data)
+        DAL.UpdateProduct(productToUpdate["id"],productToUpdate["name"],productToUpdate["price"])
+        return jsonify({'Product':'updated'}),200
+    except:
+        return jsonify({'Product':'not updated'}),400
 
 @app.route("/products/<int:id>",methods=['DELETE'])
 def deleteProduct(id: int):
-    DAL.DeleteProduct(id)
-    return jsonify({'Product':'deleted'}),200
+    try:
+        DAL.DeleteProduct(id)
+        return jsonify({'Product':'deleted'}),200
+    except:
+        return jsonify({'Product':'not deleted'}),400

@@ -36,8 +36,8 @@ def testGetProductByIdFailure():
 def testInsertProduct():
     url = "http://127.0.0.1:5000/products"
     insertProduct = {
-        'name':'Integration product',
-        'price':'0.01'}
+        'name':'Integration product - pytest',
+        'price':'0.02'}
     response = requests.post(url,json=insertProduct)
 
     assert response.status_code == 200
